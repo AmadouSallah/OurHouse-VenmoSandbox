@@ -18,6 +18,7 @@ require 'httparty'
 require 'pg'
 require 'active_record'
 require 'logger'
+require 'debugger'
 
 
 require 'erb'

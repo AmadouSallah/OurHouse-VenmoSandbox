@@ -10,7 +10,6 @@ helpers do
   end
 
   def venmo_authorize
-    # ie: http://foo.com/resource.json?limit=10
     url = "https://api.venmo.com/v1/oauth/access_token"
     @venmo_response = HTTParty.post(url, :query => {
       client_id: ENV['VENMO_CLIENT_ID'],
@@ -20,8 +19,7 @@ helpers do
   end
 
   def capture_venmo_access_token
-    response = @venmo_response.to_json
-    debugger
+    response = JSON.parse(@venmo_response.to_json)
     current_user.update(venmo_access_token: response["access_token"]) if response["access_token"]
   end
 
