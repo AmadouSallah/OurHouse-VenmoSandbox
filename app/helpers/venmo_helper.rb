@@ -26,4 +26,37 @@ helpers do
   def current_user
     @current_user ||= User.find(1)
   end
+
+  def create_venmo_payment
+    url = "https://sandbox-api.venmo.com/v1/payments"
+    @venmo_payment_response =
+      HTTParty.post(url, :query => payment_params)
+    capture_payment_response
+  end
+
+  def capture_payment_response
+    response = JSON.parse(@venmo_payment_response.to_json)["data"]
+    @payment = Payment.new(user_id: current_user.id,
+                   payment_to: response["payment"]["target"]["user"]["id"],
+                   amount: response["payment"]["amount"].to_f,
+                   note: response["payment"]["note"],
+                   venmo_payment_id: response["payment"]["id"],
+                   venmo_payment_status: response["payment"]["status"]
+                   )
+  end
+
+  def payment_successful?
+    # debugger
+    true if @payment.save && @payment.venmo_payment_status == "settled"
+    # @payment.save && @payment.venmo_payment_status == "settled"
+
+  end
+
+  def payment_params
+    {email: params[:receivers_email],
+     note: params[:payment_note],
+     amount: params[:payment_amount].to_f,
+     access_token: current_user.venmo_access_token}
+  end
+
 end

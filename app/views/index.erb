@@ -12,5 +12,16 @@
 <body ng-controller='mainCtrl'></body> <!-- controller name, make sure it matches the name of your controller in controllers.js -->
   <h1>Hello!</h1>
   <button><a href="<%= venmo_auth_url %>">Venmo OAuth</a></button>
+  <h2> Send a Payment </h2>
+  <form method="POST" action="/venmo_payment">
+    <input type="text" name="receivers_email" placeholder="Receivers Email"><br>
+    <input type="text" name="payment_amount" placeholder="$10.00"><br>
+    <input type="text" name="payment_note" placeholder="Thanks for lunch!"> <br>
+    <input type="submit" value="Send Payment!">
+  </form>
+  <% if @payment %>
+    <h1> OMG PAYMENT INFO </h1>
+    <%= @payment %>
+  <% end %>
 </body>
 </html>

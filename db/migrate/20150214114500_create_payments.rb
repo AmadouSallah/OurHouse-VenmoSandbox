@@ -5,7 +5,7 @@ class CreatePayments < ActiveRecord::Migration
       t.string      :payment_to
       t.integer     :amount
       t.string      :note
-      t.integer     :venmo_payment_id
+      t.string      :venmo_payment_id
       t.string      :venmo_payment_status
 
       t.timestamps
