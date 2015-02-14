@@ -1,0 +1,16 @@
+<html lang='en' ng-app='yourAppName'> <!-- put your app name in here and make sure it matches the controller -->
+<head>
+  <link href='/css/normalize.css' rel='stylesheet'>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js'></script>
+  <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+  <script src='/js/application.js'></script>
+  <script src='/js/controllers.js'></script>
+  <script src='/bower_components/angular-cookie/angular-cookie.js'></script>
+  <script src='/bower_components/ng-token-auth/dist/ng-token-auth.js'></script>
+  <title>Angular Skeleton</title>
+</head>
+<body ng-controller='mainCtrl'></body> <!-- controller name, make sure it matches the name of your controller in controllers.js -->
+  <h1>Hello!</h1>
+  <button><a href="<%= venmo_auth_url %>">Venmo OAuth</a></button>
+</body>
+</html>
